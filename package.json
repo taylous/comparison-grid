@@ -1,0 +1,70 @@
+{
+  "name": "comparison-grid",
+  "version": "0.0.0",
+  "description": "같은 주제의 데이터를 Grid로 정렬·비교하는 라이브러리",
+  "author": "taylous",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=18.12.0",
+    "pnpm": ">=9"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "rstest run",
+    "test:watch": "rstest watch",
+    "test:cov": "rstest run --coverage",
+    "lint": "eslint .",
+    "lint:fsd": "steiger src",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@feature-sliced/steiger-plugin": "^0.6.0",
+    "@rsbuild/core": "^2.0.15",
+    "@rsbuild/plugin-react": "^2.1.0",
+    "@rslib/core": "^0.23.0",
+    "@rstest/core": "^0.10.6",
+    "@rstest/coverage-istanbul": "^0.10.6",
+    "@storybook/addon-docs": "^10.4.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.5.0",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.8.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "steiger": "^0.5.13",
+    "storybook": "^10.4.6",
+    "storybook-react-rsbuild": "^3.3.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1"
+  }
+}
