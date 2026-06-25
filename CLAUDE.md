@@ -28,7 +28,7 @@
 - public API는 최소로 유지한다. 내부 구현(slice 내부 모듈, 측정 로직 등)은 export 하지 않는다.
 - column은 `{ key, displayText, renderCell, ... }` 설정 객체로 받는다. (예시: requirements.md)
 - tree-shaking이 가능하도록 side-effect를 피하고 named export를 기본으로 한다.
-- Controlled / Uncontrolled 입장은 API 확정 시 결정한다. **(TODO: 결정 후 여기 명시)**
+- Controlled / Uncontrolled 입장은 **Hybrid**로 확정한다. (기본 Uncontrolled + 필요한 상태만 optional controlled props) 상세 계약은 `./.claude/docs/api-design.md` 참조.
 
 ## 4. 디자인 패턴
 
