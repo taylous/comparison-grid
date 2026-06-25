@@ -16,7 +16,7 @@ color: blue
 
 ## 무엇을 작성하는가
 
-- **rstest**(fallback: vitest)로 unit test를 작성한다. 코드가 속한 FSD slice에 같이 둔다.
+- **rstest**(fallback: vitest)로 unit test를 작성한다. 테스트 파일은 대상 코드와 **같은 디렉토리의 `__test__` 하위**에 둔다. (예: `entities/column/lib/merge.ts` → `entities/column/lib/__test__/merge.test.ts`) `*.test.ts`를 `*.ts`와 같은 폴더에 섞어 두지 않는다.
 - component는 **Storybook** story로 작성하여 사용자가 동작을 눈으로 확인할 수 있게 한다.
 - happy path뿐 아니라, 이 라이브러리가 쉽게 틀리는 엣지 케이스를 반드시 커버한다:
   - 행 높이 = 모든 grid의 같은 index 행 자연 높이 중 **최댓값**.

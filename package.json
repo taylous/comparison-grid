@@ -66,5 +66,12 @@
     "storybook-react-rsbuild": "^3.3.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["win32", "linux"],
+      "cpu": ["x64"],
+      "libc": ["glibc"]
+    }
   }
 }
