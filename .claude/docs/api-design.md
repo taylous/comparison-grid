@@ -28,12 +28,22 @@
 import type { ReactNode } from 'react';
 
 // ── entities/column ──────────────────────────────
+// TRow 가 객체면 그 string property 키, 아니면 never (scalar 에서 프로토타입 메서드명 추론 방지)
+type RowPropertyKey<TRow> = TRow extends object ? Extract<keyof TRow, string> : never;
+
 export interface ColumnDef<TRow> {
-  key: string;
+  // 객체면 property 이름 자동완성 + 임의 문자열(계산 컬럼) 허용. scalar 면 그냥 string.
+  // (string & {}) 는 리터럴 자동완성을 유지하는 LiteralUnion 패턴.
+  key: RowPropertyKey<TRow> | (string & {});
   displayText: string | (() => ReactNode); // feature 2
   renderCell: (row: TRow) => ReactNode; // feature 2
-  /** feature 3,4: 아래로 같은 textContent 면 병합. column 단위 flag 이므로 불규칙 병합 허용. 기본 false. */
+  /** feature 3,4: 아래로 같은 값이 연속되면 병합. column 단위 flag 이므로 불규칙 병합 허용. 기본 false. */
   mergeable?: boolean;
+  /**
+   * 병합 시 "같다"고 판단할 비교 값. 생략하면 renderCell 결과가 string|number 일 때 그 값을 쓰고,
+   * 그 외(JSX 등)면 비교 불가로 보고 해당 열은 병합하지 않는다.
+   */
+  getMergeValue?: (row: TRow) => string | number;
   /** 열 너비(px). 가로 기하는 grid 책임. */
   width?: number;
   /** feature 6 toggle 대상 여부. 기본 true. */
