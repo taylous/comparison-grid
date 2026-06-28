@@ -63,7 +63,7 @@ const columns = [
 
 ```
 naturalHeights: Map<gridId, number[]>      // grid별 측정값 캐시
-rowHeights[i] = max over g ( naturalHeights[g][i] ?? estimate )
+rowHeights[i] = max( estimate, max over g ( naturalHeights[g][i] ) )  // estimate = 전역 floor
 rowOffsets[i] = Σ rowHeights[0..i-1]
 totalHeight   = Σ rowHeights
 ```
@@ -74,9 +74,10 @@ totalHeight   = Σ rowHeights
 - 스크롤이 동기화되어 모든 grid가 같은 행 index를 동시에 보여주므로, **현재 보이는 행만** 측정·정렬한다.
 - 화면 밖 행은 estimate로 두고, 스크롤되어 보일 때 측정·보정한다.
 
-### estimate (화면 밖 행 높이 추정)
+### estimate (화면 밖 행 높이 추정 = 전역 최소 높이 floor)
 
 - **고정 상수 `20`** (= default cell height)을 사용한다.
+- estimate는 미측정 행의 추정값이자 **모든 행의 전역 최소 높이(floor)** 다. 측정값이 20보다 작은 행도 20으로 끌어올린다.
 - **모든 grid가 동일한 estimate를 사용해야** totalHeight가 grid 간 어긋나지 않아 스크롤 동기화가 유지된다.
 - 한계: 실제 자연 높이가 20보다 크면 화면 밖을 과소추정하여, 스크롤 시 measured 값으로 보정되며 스크롤바 thumb이 다소 점프할 수 있다. (v1 허용. 거슬리면 estimate를 "관측 행 높이의 러닝 평균"으로 교체 가능)
 
